@@ -18,9 +18,6 @@ RUN apt-get -qq clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
 ENV HOME /root
 
 # Copy the supervisord configuration file into the container
