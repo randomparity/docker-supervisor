@@ -13,11 +13,6 @@ RUN apt-get -qq update && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/supervisor/conf.d
 
-# Clean-up any unneeded files
-RUN apt-get -qq clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/*
-
 ENV HOME /root
 
 # Copy the supervisord configuration file into the container
