@@ -14,8 +14,6 @@ RUN apt-get -q update && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/supervisor/conf.d
 
-ENV HOME /root
-
 # Create a user to match the host OS for file access
 RUN addgroup --gid 1000 sysadmin && \
     adduser --disabled-password --uid 1000 --gid 1000 --gecos "" sysadmin
