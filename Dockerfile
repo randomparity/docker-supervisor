@@ -1,7 +1,8 @@
 FROM ubuntu:trusty
 
 MAINTAINER David Christensen <randomparity@gmail.com>
-ENV LAST_UPDATE 2015-01-12
+
+ENV LAST_UPDATE_SUPERVISOR 2015-01-12
 
 # Remove error messages like "debconf: unable to initialize frontend: Dialog":
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
