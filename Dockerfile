@@ -8,7 +8,7 @@ ENV LAST_UPDATE_SUPERVISOR 2015-01-12
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # Fetch/install latest updates and install needed tools
-RUN apt-get -qq update && \
+RUN apt-get -q update && \
     apt-get -qy upgrade  && \
     apt-get -qy install supervisor && \
     mkdir -p /var/log/supervisor && \
