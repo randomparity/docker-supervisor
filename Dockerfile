@@ -15,6 +15,10 @@ RUN apt-get -qq update && \
 
 ENV HOME /root
 
+# Create a user to match the host OS for file access
+RUN addgroup --gid 1000 sysadmin && \
+    adduser --disabled-password --uid 1000 --gid 1000 --gecos "" sysadmin
+
 # Copy the supervisord configuration file into the container
 COPY supervisor.conf /etc/supervisor.conf
 
