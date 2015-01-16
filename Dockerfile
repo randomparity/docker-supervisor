@@ -24,13 +24,13 @@ RUN mkdir -p /var/log/supervisor && \
 # by users of this image.  Let them clean it up. :-)
 
 # Create a user to match the host OS for file access (e.g. network share)
-ENV PROCESS_USER sysadmin
-ENV PROCESS_GROUP sysadmin
-ENV PROCESS_USER_UID 1000
-ENV PROCESS_USER_GID 1000
-RUN addgroup --gid $PROCESS_USER_GID $PROCESS_GROUP && \
-    adduser --disabled-password --uid $PROCESS_USER_UID \
-    --gid $PROCESS_USER_GID --gecos "" $PROCESS_USER
+ENV BASE_USER sysadmin
+ENV BASE_GROUP sysadmin
+ENV BASE_USER_UID 1000
+ENV BASE_USER_GID 1000
+RUN addgroup --gid $BASE_USER_GID $BASE_GROUP && \
+    adduser --disabled-password --uid $BASE_USER_UID \
+    --gid $BASE_USER_GID --gecos "" $BASE_USER
 
 # Copy the supervisord configuration file into the container
 COPY supervisor.conf /etc/supervisor.conf
