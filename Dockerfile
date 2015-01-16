@@ -25,9 +25,10 @@ RUN mkdir -p /var/log/supervisor && \
 
 # Create a user to match the host OS for file access (e.g. network share)
 ENV PROCESS_USER sysadmin
+ENV PROCESS_GROUP sysadmin
 ENV PROCESS_USER_UID 1000
 ENV PROCESS_USER_GID 1000
-RUN addgroup --gid $PROCESS_USER_GID $PROCESS_USER && \
+RUN addgroup --gid $PROCESS_USER_GID $PROCESS_GROUP && \
     adduser --disabled-password --uid $PROCESS_USER_UID \
     --gid $PROCESS_USER_GID --gecos "" $PROCESS_USER
 
