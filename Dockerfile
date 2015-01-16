@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 
 MAINTAINER David Christensen <randomparity@gmail.com>
 
-ENV LAST_UPDATE_SUPERVISOR 2015-01-14
+ENV LAST_UPDATE_SUPERVISOR 2015-01-16
 
 # Remove error messages like "debconf: unable to initialize frontend: Dialog":
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -14,7 +14,7 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" >
     /etc/apt/sources.list && \
     apt-get -q update && \
     apt-get -qy upgrade && \
-    apt-get -qy install software-properties-common supervisor wget
+    apt-get -qy install software-properties-common supervisor wget git
 
 # Configure image for supervisord operation
 RUN mkdir -p /var/log/supervisor && \
@@ -24,8 +24,12 @@ RUN mkdir -p /var/log/supervisor && \
 # by users of this image.  Let them clean it up. :-)
 
 # Create a user to match the host OS for file access (e.g. network share)
-RUN addgroup --gid 1000 sysadmin && \
-    adduser --disabled-password --uid 1000 --gid 1000 --gecos "" sysadmin
+ENV PROCESS_USER sysadmin
+ENV PROCESS_USER_UID 1000
+ENV PROCESS_USER_GID 1000
+RUN addgroup --gid $PROCESS_USER_GID $PROCESS_USER && \
+    adduser --disabled-password --uid $PROCESS_USER_UID \
+    --gid $PROCESS_USER_GID --gecos "" $PROCESS_USER
 
 # Copy the supervisord configuration file into the container
 COPY supervisor.conf /etc/supervisor.conf
